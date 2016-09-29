@@ -3,14 +3,13 @@ package com.example.client
 import akka.actor.ActorSystem
 import akka.pattern.ask
 import akka.util.Timeout
-import messages.request.Messages.{GetObject, StoreObject}
+import messages.request.Messages.{GetObject, SetIfNotExist, StoreObject}
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-class DatabaseClient(
-  val databaseAddress : String
-) {
+class DatabaseClient(databaseAddress: String) {
+
   val databasePath = s"akka.tcp://akka-db@$databaseAddress/user/akka-db"
 
   private implicit val timeout = Timeout(2 seconds)
@@ -19,5 +18,7 @@ class DatabaseClient(
 
   def save(key: String, value: Object): Future[Any] = database ? StoreObject(key, value)
 
-  def get(key: String): Future[Any] =  database ? GetObject(key)
+  def get(key: String): Future[Any] = database ? GetObject(key)
+
+  def saveIfNotExists(key: String, value: Object): Future[Any] = database ? SetIfNotExist(key, value)
 }
