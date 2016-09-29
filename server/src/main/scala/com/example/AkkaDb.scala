@@ -30,6 +30,7 @@ class AkkaDb extends Actor {
     case GetObject(key) => sender() ! Result(key, map.get(key))
     case SetIfNotExist(key, value) => setKey(key, value)(sender())
     case _ => sender() ! AkkaDb.UnknownMessage
+
   }
 }
 

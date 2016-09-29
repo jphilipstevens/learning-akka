@@ -1,4 +1,4 @@
-name := """kvstore-server"""
+name := """kvstore-client"""
 
 version := "1.0"
 
