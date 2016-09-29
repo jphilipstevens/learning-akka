@@ -1,10 +1,15 @@
-name := """kvstore"""
+lazy val root = (project in file(".")).
+  aggregate(messages, server)
 
-version := "1.0"
+lazy val commonSettings = Seq(
+  organization := "jono.app",
+  version := "0.1.0",
+  scalaVersion := "2.11.8"
+)
 
-scalaVersion := "2.11.6"
+lazy val messages = (project in file("messages"))
+  .settings(commonSettings: _*)
 
-libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % "2.3.11",
-  "com.typesafe.akka" %% "akka-testkit" % "2.3.11" % "test",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test")
+lazy val server = (project in file("server"))
+  .settings(commonSettings: _*)
+  .dependsOn(messages)

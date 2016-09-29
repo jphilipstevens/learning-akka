@@ -4,8 +4,8 @@ package com.example
 import scala.concurrent.duration._
 import akka.actor.ActorSystem
 import akka.testkit.{ImplicitSender, TestActorRef, TestKit}
-import com.example.request.Messages.{GetObject, StoreObject}
-import com.example.response.Messages.{Result, SuccessfulOperation}
+import messages.request.Messages.{GetObject, StoreObject}
+import messages.response.Messages.{Result, SuccessfulOperation}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, FunSpecLike, Matchers}
 
 class AkkaDbSpec extends TestKit(ActorSystem("test-system"))

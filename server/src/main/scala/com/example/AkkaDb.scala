@@ -1,8 +1,8 @@
 package com.example
 
 import akka.actor.{Actor, ActorRef}
-import com.example.request.Messages._
-import com.example.response.Messages.{Result, SuccessfulOperation}
+import messages.request.Messages._
+import messages.response.Messages._
 
 import scala.collection.mutable
 

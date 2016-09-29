@@ -1,4 +1,4 @@
-package com.example.request
+package messages.request
 
 
 object Messages {
