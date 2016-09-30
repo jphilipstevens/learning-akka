@@ -5,7 +5,7 @@ import scala.concurrent.duration._
 import akka.actor.ActorSystem
 import akka.testkit.{ImplicitSender, TestActorRef, TestKit}
 import messages.request.Messages.{GetObject, StoreObject}
-import messages.response.Messages.{Result, SuccessfulOperation}
+import messages.response.Messages.{Result, SuccessfulOperation, UnknownMessage}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, FunSpecLike, Matchers}
 
 class AkkaDbSpec extends TestKit(ActorSystem("test-system"))
@@ -59,6 +59,13 @@ class AkkaDbSpec extends TestKit(ActorSystem("test-system"))
       val key = "key"
       actorRef ! GetObject("key")
       expectMsg(TestConfiguration.Timeout, Result("key", None))
+    }
+  }
+
+  describe("Sending am unknown request") {
+    it("Return an Unknown message ") {
+      actorRef ! "I should not exist"
+      expectMsg(TestConfiguration.Timeout, UnknownMessage)
     }
   }
 }

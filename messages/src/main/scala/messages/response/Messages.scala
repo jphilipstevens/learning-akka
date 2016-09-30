@@ -7,4 +7,6 @@ object Messages {
 
   case class Result(key: String, value: Option[Object])
 
+  val UnknownMessage = "unknown message"
+
 }

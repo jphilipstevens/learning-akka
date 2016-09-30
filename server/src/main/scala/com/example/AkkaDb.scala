@@ -29,12 +29,7 @@ class AkkaDb extends Actor {
     case StoreObject(key, value) => storeObject(key, value)(sender())
     case GetObject(key) => sender() ! Result(key, map.get(key))
     case SetIfNotExist(key, value) => setKey(key, value)(sender())
-    case _ => sender() ! AkkaDb.UnknownMessage
+    case _ => sender() ! UnknownMessage
 
   }
-}
-
-object AkkaDb {
-  val UnknownMessage = "unknown message"
-
 }
